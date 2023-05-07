@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "b1XZGjSgB54X+SdDz2QnX3WDCKoB7spX59zwcrKvCPw=",
+  "Source": "TicketSystem.Backend",
+  "BasePath": "_content/TicketSystem.Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
