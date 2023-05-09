@@ -12,3 +12,17 @@ C:\Users\PC\Desktop\ticket system\TiketSystem\Backend\TicketSystem.Database\obj\
 C:\Users\PC\Desktop\ticket system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.pdb
 C:\Users\PC\Desktop\ticket system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.genruntimeconfig.cache
 C:\Users\PC\Desktop\ticket system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\ref\TicketSystem.Database.dll
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\bin\Debug\net6.0\TicketSystem.Database.deps.json
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\bin\Debug\net6.0\TicketSystem.Database.runtimeconfig.json
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\bin\Debug\net6.0\TicketSystem.Database.dll
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\bin\Debug\net6.0\TicketSystem.Database.pdb
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.AssemblyInfo.cs
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.dll
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\refint\TicketSystem.Database.dll
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.pdb
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\TicketSystem.Database.genruntimeconfig.cache
+C:\Users\PC\Desktop\ticket-system\TiketSystem\Backend\TicketSystem.Database\obj\Debug\net6.0\ref\TicketSystem.Database.dll

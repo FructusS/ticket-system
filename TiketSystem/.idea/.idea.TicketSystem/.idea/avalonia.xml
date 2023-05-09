@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="Frontend/Desktop/MainWindow.axaml" value="Frontend/Desktop/Desktop.csproj" />
+        <entry key="Frontend/Desktop/views/LoginView.axaml" value="Frontend/Desktop/TicketSystem.Desktop.csproj" />
       </map>
     </option>
   </component>

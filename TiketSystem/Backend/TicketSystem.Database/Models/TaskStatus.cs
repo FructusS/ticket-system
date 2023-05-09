@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-namespace TicketSystem.Backend.Models;
+namespace TicketSystem.Database.Models;
 
-public class TaskStatus
+public partial class TaskStatus
 {
+    public TaskStatus()
+    {
+        Tasks = new HashSet<Task>();
+    }
     public int Id { get; set; }
 
-    public string? Title { get; set; }
-    [JsonIgnore]
+    public string Title { get; set; }
 
-    public virtual ICollection<Task> Tasks { get; } = new List<Task>();
-
+    public virtual ICollection<Task> Tasks { get; set; } 
 }

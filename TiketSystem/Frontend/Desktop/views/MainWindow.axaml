@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:TicketSystem.Desktop.viewmodels"
+        xmlns:views="clr-namespace:TicketSystem.Desktop.views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TicketSystem.Desktop.views.MainWindow"
+        Title="MainWindow">
+	<ContentControl Content="{Binding CurrentPage}">
+		<ContentControl.DataTemplates>
+			<DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+				<views:LoginView></views:LoginView>
+			</DataTemplate>
+		</ContentControl.DataTemplates>
+        <ContentControl.DataTemplates>
+            <DataTemplate DataType="{x:Type viewmodels:TicketViewModel}">
+                <views:TicketView></views:TicketView>
+            </DataTemplate>
+        </ContentControl.DataTemplates>
+	</ContentControl>
+
+
+</Window>

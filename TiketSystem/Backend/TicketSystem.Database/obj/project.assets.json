@@ -1082,11 +1082,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
       "projectName": "TicketSystem.Database",
-      "projectPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
+      "projectPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1142,8 +1142,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -1152,7 +1151,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

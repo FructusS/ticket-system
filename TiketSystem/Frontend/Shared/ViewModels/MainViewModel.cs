@@ -4,13 +4,11 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR.Client;
-
-using MyTask = TicketSystem.Backend.Models.Task;
+using ViewModels;
 
 namespace Desktop;
 
-public class MainViewModel : INotifyPropertyChanged
+public class MainViewModel : BaseViewModel
 {
     HttpClient client;
     HttpClientHandler clientHandler;
@@ -41,17 +39,6 @@ public class MainViewModel : INotifyPropertyChanged
     {
         hubConnection = new HubConnectionBuilder()
             .WithUrl($"https://localhost:7253/ticketHub")
-            //, (opts) =>
-            //{
-            //    //opts.HttpMessageHandlerFactory = (message) =>
-            //    //{
-            //    //    if (message is HttpClientHandler clientHandler)
-            //    //        // bypass SSL certificate
-            //    //        clientHandler.ServerCertificateCustomValidationCallback +=
-            //    //            (sender, certificate, chain, sslPolicyErrors) => { return true; };
-            //    //    return message;
-            //    //};
-            //})
             .Build();
 
            

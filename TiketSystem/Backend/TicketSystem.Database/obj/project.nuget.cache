@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u4CX9ES+drz1qL4QVWOG7jKD4uqCQsLoxr0OP3ot8v3vUIXHTnJDOrN/Eo6pOPdqjg1Gl4Nb9O0lh0k2je2tyg==",
+  "dgSpecHash": "jsWSvaGplhwCnq6JKobmkEriQyUqm1D2aysFG3ZWMBTZaCfbQUw3YMiuOJsIh3Cm3kx1b4RXcqQEscbaKobjyQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.5\\microsoft.entityframeworkcore.7.0.5.nupkg.sha512",

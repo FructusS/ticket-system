@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dnY4V1UEZoNcXrSyu5JqY/+zJQnGt+L6GrNiUbgicSJ05TX3Gs91XLE8LzRpxrR9np8NTlUZ3qiuE6qek/wkGw==",
+  "dgSpecHash": "IlLHQ4BMKa32FjJPDWG8V1CnpaxUSix20SmEh0z6zKIyezddbnNS0GVt+dXkfwG0KugaFKD6hZAjqgQuWQKPtg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Frontend\\Desktop\\Desktop.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Frontend\\Desktop\\TicketSystem.Desktop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\avalonia\\0.10.18\\avalonia.0.10.18.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.0.2020091801\\avalonia.angle.windows.natives.2.1.0.2020091801.nupkg.sha512",
@@ -53,6 +53,7 @@
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\skiasharp\\2.88.1-preview.108\\skiasharp.2.88.1-preview.108.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\skiasharp.nativeassets.linux\\2.88.1-preview.108\\skiasharp.nativeassets.linux.2.88.1-preview.108.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.1-preview.108\\skiasharp.nativeassets.macos.2.88.1-preview.108.nupkg.sha512",

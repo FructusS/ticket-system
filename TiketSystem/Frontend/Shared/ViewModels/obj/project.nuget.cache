@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "NDn5OrwWYk/V8cxf3twTHhhp1kwyAPSiamOZBGwtY4yQ7BUqMauODx5tWU5BzFTbCcxbb/4oaDeQNRsX+aEWuQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Frontend\\Shared\\ViewModels\\TicketSystem.ViewModels.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\fody\\6.6.4\\fody.6.6.4.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\propertychanged.fody\\4.1.0\\propertychanged.fody.4.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}

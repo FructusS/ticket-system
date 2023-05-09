@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj": {}
+    "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj": {
+    "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj",
         "projectName": "TicketSystem.Backend",
-        "projectPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj",
+        "projectPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj",
         "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Backend\\obj\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj": {
-                "projectPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj"
+              "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj": {
+                "projectPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj"
               }
             }
           }
@@ -44,6 +44,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -75,8 +83,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -88,18 +95,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj": {
+    "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
         "projectName": "TicketSystem.Database",
-        "projectPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
+        "projectPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\TicketSystem.Database.csproj",
         "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Database\\obj\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -155,8 +162,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -165,7 +171,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

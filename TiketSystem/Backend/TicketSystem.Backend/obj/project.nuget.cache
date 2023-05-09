@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "oJid/4zcmTPb2mbsxkaI7iYPUsZcIX8ALpCswOxtnQ5ia7IvvfK+f8frnPVuRIE3tfxlJnUeHnIbxcSpSFImGA==",
+  "dgSpecHash": "6wsQJxKCAzrYh8g3mOe1+G0oractXqLEbPsEduTGTD9phms+n2u2D4HR5oQnPJn2ZOS3/PNA9Py4CsL3JO5xwQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Desktop\\ticket-system\\TiketSystem\\Backend\\TicketSystem.Backend\\TicketSystem.Backend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.5\\microsoft.entityframeworkcore.7.0.5.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.5\\microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.5\\microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",

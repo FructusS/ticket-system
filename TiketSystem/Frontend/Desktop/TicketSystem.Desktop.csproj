@@ -26,6 +26,7 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.0-preview.3.23177.8" />
+        <PackageReference Include="Prism.Core" Version="8.1.97" />
         <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
     </ItemGroup>
 
