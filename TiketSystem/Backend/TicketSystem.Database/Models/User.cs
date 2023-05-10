@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TicketSystem.Database.Models;
 
@@ -7,7 +8,6 @@ public partial class User
 {
     public User()
     {
-        Tasks = new List<Task>();
     }
     public int UserId { get; set; }
 
@@ -23,7 +23,9 @@ public partial class User
 
     public int UserRoleId { get; set; }
 
-    public virtual ICollection<Task> Tasks { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<Task> Tasks { get; } = new List<Task>();    
+    
 
     public virtual UserRole UserRole { get; set; }
 }
