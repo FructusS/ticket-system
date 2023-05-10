@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketSystem.Desktop", "Fro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{B63BA0D2-E629-4F64-B365-2CA45F40B18C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0E100C2B-4185-44DA-AA53-018D1322AF3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.ViewModels", "Shared\Models\Shared.ViewModels.csproj", "{C4E3490A-AECE-4A6C-9B85-027A017B29F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{5A7034CF-9C07-4902-AD93-FB76055B8F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7034CF-9C07-4902-AD93-FB76055B8F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A7034CF-9C07-4902-AD93-FB76055B8F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E3490A-AECE-4A6C-9B85-027A017B29F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E3490A-AECE-4A6C-9B85-027A017B29F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E3490A-AECE-4A6C-9B85-027A017B29F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E3490A-AECE-4A6C-9B85-027A017B29F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +50,7 @@ Global
 		{E6A45493-9EAD-4B79-B5BB-9776E8564B51} = {530A97CA-C605-4FFA-A0BA-11390CF54EDF}
 		{5A7034CF-9C07-4902-AD93-FB76055B8F00} = {B63BA0D2-E629-4F64-B365-2CA45F40B18C}
 		{B63BA0D2-E629-4F64-B365-2CA45F40B18C} = {597B9BF0-EFBC-4C00-B908-41CABCFA507B}
+		{C4E3490A-AECE-4A6C-9B85-027A017B29F6} = {0E100C2B-4185-44DA-AA53-018D1322AF3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19269429-F263-4097-B682-7FA20BE41FA9}

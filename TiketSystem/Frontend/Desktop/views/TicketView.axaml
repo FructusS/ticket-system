@@ -3,13 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TicketSystem.Desktop.views.TicketView">
+             x:Class="TicketSystem.Desktop.Views.TicketView">
     <Grid ColumnDefinitions="* * *">
 
 		<TextBlock Grid.Column="2" Text="{Binding Title}"></TextBlock>
 		<StackPanel Grid.Column="3">
-			<Button Content="send" Command="{Binding LoginCommand}"  ></Button>
-			<Button Content="admin button" Command="{Binding TestCommand}"  ></Button>
+			<Button Content="send" Command="{Binding SendTaskCommand}"  ></Button>
+			<Button Content="admin button" Command="{Binding AdminCommand}"  ></Button>
 		</StackPanel>
 
 		<ListBox Items="{Binding Path=Tasks}" Grid.ColumnSpan="2">
@@ -21,14 +21,14 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel MaxWidth="300" MaxHeight="300" Height="280" Orientation="Vertical">
+                    <StackPanel MaxWidth="300" MaxHeight="300" Height="150" Width="150" Orientation="Vertical">
                         <TextBlock Text="{Binding Title}" Margin="5,0,0,0" ></TextBlock>
                         <TextBlock Text="{Binding Id, StringFormat={} {0} id}" Margin="5,0,0,0" ></TextBlock>
                         <TextBlock Text="{Binding TaskStatus}" Margin="5,0,0,0" ></TextBlock>
                         <TextBlock Text="{Binding Description}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
-                        <Button Background="Transparent" DockPanel.Dock="Left">
+                        <Button Background="Transparent" DockPanel.Dock="Left" IsVisible="{Binding IsAdmin}">
 
-                            <Image Source="/images/text-box-edit-outline.png" Width="25"></Image>
+                            <Image Source="/Images/text-box-edit-outline.png" Width="25"></Image>
 
                         </Button>
                     </StackPanel>

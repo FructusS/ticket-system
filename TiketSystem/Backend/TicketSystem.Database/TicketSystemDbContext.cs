@@ -3,7 +3,6 @@ using TicketSystem.Database.Models;
 using Task = TicketSystem.Database.Models.Task;
 using TaskStatus = TicketSystem.Database.Models.TaskStatus;
 
-
 namespace TicketSystem.Database;
 
 public partial class TicketSystemDbContext : DbContext
@@ -19,6 +18,7 @@ public partial class TicketSystemDbContext : DbContext
     {
     }
 
+
     public virtual DbSet<Task> Tasks { get; set; }
 
     public virtual DbSet<TaskStatus> TaskStatuses { get; set; }
@@ -26,6 +26,7 @@ public partial class TicketSystemDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

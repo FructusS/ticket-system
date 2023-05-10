@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using TicketSystem.Backend.Hubs;
 using TicketSystem.Backend.Mapping;
 using TicketSystem.Database;
@@ -23,7 +24,7 @@ namespace TicketSystem.Backend
 
             builder.Services.AddSignalR();
             var app = builder.Build();
-          //  AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
