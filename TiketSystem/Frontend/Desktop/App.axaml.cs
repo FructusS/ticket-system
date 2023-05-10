@@ -1,8 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using TicketSystem.Desktop.viewmodels;
-using TicketSystem.Desktop.views;
+using Prism.Events;
+using TicketSystem.Desktop.ViewModels;
+using TicketSystem.Desktop.Views;
 
 namespace Desktop;
 
@@ -19,7 +20,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(new EventAggregator()),
             };
         }
 
