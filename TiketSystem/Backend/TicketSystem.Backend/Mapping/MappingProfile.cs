@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Chat.Web.ViewModels;
 using TicketSystem.Database.Models;
+using TicketSystem.Shared.ViewModels;
 
 namespace TicketSystem.Backend.Mapping
 {
