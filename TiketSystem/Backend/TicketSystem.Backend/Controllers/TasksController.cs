@@ -4,6 +4,10 @@ using System.Text.RegularExpressions;
 using TicketSystem.Backend.Hubs;
 using Task = TicketSystem.Database.Models.Task;
 using TicketSystem.Database;
+using TicketSystem.Shared.ViewModels;
+using Shared.ViewModels;
+using TicketSystem.Database.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace TicketSystem.Backend.Controllers
 {
@@ -21,30 +25,56 @@ namespace TicketSystem.Backend.Controllers
         }
 
 
-        [HttpGet("[action]/{userId}")]
-        public IActionResult GetTasks(int userId)
+        [HttpGet("[action]/{userName}")]
+        public ActionResult GetTasks(string userName)
         {
-            var tasks = _context.Tasks
-                .Where(x => x.UserId == userId)
-                .OrderByDescending(x => x.CreatedAt)
-                .Reverse()
-                .ToList();
+            var tasks = new List<Task>();
+
+            if (string.IsNullOrEmpty(userName))
+            {
+                return BadRequest();
+            }
+            var user = _context.Users.FirstOrDefault(x => x.UserName == userName);
+
+            if (user == null)
+            {
+                NotFound();
+            }
+
+            if (user.UserRole.Title == "Админ")
+            {
+                tasks = _context.Tasks
+               .OrderByDescending(x => x.CreatedAt)
+               .Reverse()
+               .ToList();
+            }
+            else
+            {
+                tasks = _context.Tasks
+               .Where(x => x.User.UserName == user.UserName)
+               .OrderByDescending(x => x.CreatedAt)
+               .Reverse()
+               .ToList();
+            }
+
             return Ok(tasks);
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<Task>> Create(Task task)
-        //{
-        //    if (task == null)
-        //        return BadRequest();
 
-        //    _context.Tasks.Add(task);
-        //    await _context.SaveChangesAsync();
-        //    await _hubContext.Clients.Group("all").SendAsync("newTask", task);
-        //  //  await _hubContext.Clients.All.SendAsync("newTask", task);
 
-        //    return CreatedAtAction(nameof(Get), new { id = task.Id }, task);
-        //}
+
+        [HttpPost]
+        public async Task<ActionResult<Task>> Create([FromBody] Task task)
+        {
+            if (task is null)
+                return BadRequest();
+
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
+
+
+            return CreatedAtAction(nameof(Get), new { id = task.Id }, task);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Task>> Get(int id)
