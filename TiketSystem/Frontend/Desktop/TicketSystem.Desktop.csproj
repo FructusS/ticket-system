@@ -25,6 +25,9 @@
         <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.18" />
+        <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.18" />
+        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.18" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.0-preview.3.23177.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.5" />
         <PackageReference Include="Prism.Core" Version="8.1.97" />
