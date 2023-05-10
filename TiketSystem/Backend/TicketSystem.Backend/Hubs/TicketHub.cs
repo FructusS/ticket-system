@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Chat.Web.ViewModels;
 using Microsoft.AspNetCore.SignalR;
 using TicketSystem.Database;
 using TicketSystem.Database.Models;
+using TicketSystem.Shared.ViewModels;
 using MyTask = TicketSystem.Database.Models.Task;
 using Task = System.Threading.Tasks.Task;
 
