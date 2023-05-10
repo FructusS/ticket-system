@@ -19,9 +19,8 @@ namespace TicketSystem.Desktop.ViewModels
 
         private readonly IEventAggregator _eventAggregator;
 
-        public bool IsAdmin { get; set; }
 
-        private static HttpClient httpClient = new()
+        private static readonly HttpClient _httpClient = new()
         {
             BaseAddress = new Uri($"http://localhost:7253/api/Tasks/"),
         };
@@ -29,6 +28,19 @@ namespace TicketSystem.Desktop.ViewModels
         private readonly HubConnection _hubConnection;
         private ObservableCollection<MyTask> tasks = new();
         private UserResponseModel _userModel;
+
+        private bool _isAdmin { get; set; }
+
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set
+            {
+                _isAdmin = value;
+                OnPropertyChanged("IsAdmin");
+            }
+
+        }
 
         private string title { get; set; }
         public string Title
@@ -56,9 +68,10 @@ namespace TicketSystem.Desktop.ViewModels
         {
 
             _userModel = userModel;
-            IsAdmin = userModel.UserRole == "Админ";
+
 
             LoadTaskList();
+
 
 
             _hubConnection = new HubConnectionBuilder()
@@ -70,13 +83,15 @@ namespace TicketSystem.Desktop.ViewModels
             {
                 Tasks.Add(task);
             });
+            IsAdmin = _userModel.UserRole == "Админ";
+
         }
 
 
 
         private async Task LoadTaskList()
         {
-            var tasks = await httpClient.GetFromJsonAsync<List<MyTask>>($"GetTasks/{_userModel.UserName}");
+            var tasks = await _httpClient.GetFromJsonAsync<List<MyTask>>($"GetTasks/{_userModel.UserName}");
             Tasks = new ObservableCollection<MyTask>(tasks);
         }
 

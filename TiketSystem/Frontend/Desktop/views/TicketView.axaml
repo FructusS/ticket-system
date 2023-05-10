@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 
              x:Class="TicketSystem.Desktop.Views.TicketView">
     <Grid ColumnDefinitions="* * *">
 
@@ -13,28 +14,56 @@
 		</StackPanel>
 
 		<ListBox Items="{Binding Path=Tasks}" Grid.ColumnSpan="2">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel MaxWidth="350" MaxHeight="350" Orientation="Vertical" >
 
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel MaxWidth="300" MaxHeight="300" Height="150" Width="150" Orientation="Vertical">
-                        <TextBlock Text="{Binding Title}" Margin="5,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding Id, StringFormat={} {0} id}" Margin="5,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding TaskStatus}" Margin="5,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding Description}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
-                        <Button Background="Transparent" DockPanel.Dock="Left" IsVisible="{Binding IsAdmin}">
+						<TextBlock Text="{Binding Title}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
+						<TextBlock Text="{Binding Description}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
+						<TextBlock Text="{Binding TaskStatus.Title }" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
 
-                            <Image Source="/Images/text-box-edit-outline.png" Width="25"></Image>
+						<StackPanel  DockPanel.Dock="Left" IsVisible="{Binding Path=IsAdmin}" x:Name="Stack">
+							<StackPanel Orientation="Horizontal">
 
-                        </Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+								<TextBlock  Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding User.UserFirstName , StringFormat='от: {0}'}"></TextBlock>
+								<TextBlock   TextWrapping="Wrap" Text="{Binding User.UserSurname ,StringFormat='{} {0} '}"></TextBlock>
+								<TextBlock   TextWrapping="Wrap" Text="{Binding User.UserPatronymic }"></TextBlock>
+
+
+
+							</StackPanel>
+							<StackPanel>
+								<TextBlock   TextWrapping="Wrap" Text="{Binding Cabinet, StringFormat='кабинет: {0}' }" IsVisible="{Binding Cabinet, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"></TextBlock>
+
+							</StackPanel>
+
+							<Button Background="Transparent">
+
+								<Image Source="/Images/text-box-edit-outline.png" Width="25"></Image>
+
+							</Button>
+						</StackPanel>
+
+                        <Interaction.Behaviors >
+
+                            <DataTriggerBehavior Binding="{Binding User.UserRoleId}" Value="1">
+                                <ChangePropertyAction TargetObject="{Binding #Stack}" PropertyName="IsVisible" Value="True" />
+                            </DataTriggerBehavior>
+							<DataTriggerBehavior Binding="{Binding User.UserRoleId}" Value="2">
+                                <ChangePropertyAction TargetObject="{Binding #Stack}" PropertyName="IsVisible" Value="False" />
+                            </DataTriggerBehavior>
+                        </Interaction.Behaviors>
+
+					</StackPanel>
+
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
 
 </UserControl>
