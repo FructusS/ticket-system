@@ -22,9 +22,7 @@ public partial class Task
     public string? Cabinet { get; set; }
 
     public int? UserId { get; set; }
-    [JsonIgnore]
 
-    public virtual TaskStatus? TaskStatus { get; set; }
-    [JsonIgnore]
-    public virtual User? User { get; set; }
+    public virtual TaskStatus TaskStatus { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }
