@@ -3,31 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TicketSystem.Desktop.views.LoginView">
-    <!--<Grid ColumnDefinitions="* * *">
-
-        <ListBox Items="{Binding Path=Tasks}" Grid.ColumnSpan="2">
-
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel MaxWidth="300" MaxHeight="300" Height="280" Orientation="Vertical">
-                        <TextBlock Text="{Binding Title}" Margin="5,0,0,0" ></TextBlock>
-                        <TextBlock Text="{Binding Description}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
-                        <Button Background="Transparent" DockPanel.Dock="Left">
-
-                            <Image Source="images/text-box-edit-outline.png" Width="25"></Image>
-
-                        </Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>-->
+             x:Class="TicketSystem.Desktop.Views.LoginView">
 
     <Grid RowDefinitions="* Auto *" ColumnDefinitions="* Auto *">
         <Border Grid.Column="1" Grid.Row="1" BorderThickness=".3" CornerRadius="10" Padding="15" BorderBrush="Black">
@@ -37,14 +13,16 @@
                 <TextBlock Grid.Row="1" Text="Логин"></TextBlock>
                 <StackPanel Orientation="Vertical" Grid.Row="1">
                     <TextBlock Text="Логин"></TextBlock>
-                    <TextBox Text="{Binding Login}"></TextBox>
+                    <TextBox Text="{Binding UserName}"></TextBox>
 
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="2">
                     <TextBlock Text="Пароль"></TextBlock>
                     <TextBox PasswordChar="*" Text="{Binding Password}"></TextBox>
 
-                </StackPanel>
+					<TextBlock Text="{Binding ErrorText}" Foreground="Red" IsVisible="{Binding  CanSubmit}"></TextBlock>
+
+				</StackPanel>
 
                 <Button Grid.Row="3" Margin="3" Content="Войти" Command="{Binding LoginCommand}"></Button>
             </Grid>
