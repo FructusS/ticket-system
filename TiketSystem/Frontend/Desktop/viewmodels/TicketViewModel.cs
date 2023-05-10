@@ -9,20 +9,27 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Commands;
-using ViewModels;
+using Prism.Events;
+using Shared.ViewModels;
 using MyTask = TicketSystem.Database.Models.Task;
-namespace TicketSystem.Desktop.viewmodels
+namespace TicketSystem.Desktop.ViewModels
 {
     public class TicketViewModel : BaseViewModel
     {
-        private static HttpClient sharedClient = new()
+
+        private readonly IEventAggregator _eventAggregator;
+
+        public bool IsAdmin { get; set; }
+
+        private static HttpClient httpClient = new()
         {
-            BaseAddress = new Uri($"http://localhost:7253/api/Tasks"),
+            BaseAddress = new Uri($"http://localhost:7253/api/Tasks/"),
         };
-        HttpClient client;
-        HttpClientHandler clientHandler;
-        HubConnection hubConnection;
+
+        private readonly HubConnection _hubConnection;
         private ObservableCollection<MyTask> tasks = new();
+        private UserResponseModel _userModel;
+
         private string title { get; set; }
         public string Title
         {
@@ -33,8 +40,8 @@ namespace TicketSystem.Desktop.viewmodels
                 OnPropertyChanged("Title");
             }
         }
-        public DelegateCommand LoginCommand { get; }
-        public DelegateCommand TestCommand { get; }
+        public DelegateCommand SendTaskCommand { get; }
+        public DelegateCommand AdminCommand { get; }
         public ObservableCollection<MyTask> Tasks
         {
             get { return tasks; }
@@ -45,51 +52,40 @@ namespace TicketSystem.Desktop.viewmodels
             }
         }
 
-        public TicketViewModel()
+        public TicketViewModel(UserResponseModel userModel)
         {
-            // LoadTaskList();
 
-         //   LoginCommand = new DelegateCommand(OnLogin);
-        
-            hubConnection = new HubConnectionBuilder()
+            _userModel = userModel;
+            IsAdmin = userModel.UserRole == "Админ";
+
+            LoadTaskList();
+
+
+            _hubConnection = new HubConnectionBuilder()
                 .WithUrl($"http://localhost:7253/ticketHub")
                 .Build();
 
             Connect();
-            LoadTaskList();
-            hubConnection.On<MyTask>("newTask", (task) =>
+            _hubConnection.On<MyTask>("newTask", (task) =>
             {
                 Tasks.Add(task);
             });
         }
 
-        private void LoadTaskList()
+
+
+        private async Task LoadTaskList()
         {
-           // Tasks = 
+            var tasks = await httpClient.GetFromJsonAsync<List<MyTask>>($"GetTasks/{_userModel.UserName}");
+            Tasks = new ObservableCollection<MyTask>(tasks);
         }
-        //private async void OnSendTaskClick()
-        //{
-        //    var task = new MyTask
-        //    {
-        //        CreatedAt = DateTime.UtcNow,
-        //        Description =
-        //            "132812312731238127jaksdshajkdhashbdansmbdanmsbdamnbsdnasbda132812312731238127jaksdshajkdhashbdansmbdanmsbdamnbsdnasbdamnbdmas132812312731238127jaksdshajkdhashbdansmbdanmsbdamnbsdnasbdamnbdmas132812312731238127jaksdshajkdhashbdansmbdanmsbdamnbsdnasbdamnbdmas132812312731238127jaksdshajkdhashbdansmbdanmsbdamnbsdnasbdamnbdmasmnbdmas",
-        //        Title = "test1",
-        //        UserId = 1,
-        //        TaskStatusId = 1
-        //    };
-        //    await hubConnection.InvokeAsync("SendTask", task);
 
-        //}
-
-
-       
         public async Task Connect()
         {
 
             try
             {
-                await this.hubConnection.StartAsync();
+                await this._hubConnection.StartAsync();
             }
             catch (Exception ex)
             {
