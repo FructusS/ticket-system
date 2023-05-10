@@ -1,7 +1,8 @@
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using Desktop;
 
-namespace TicketSystem.Desktop.views
+namespace TicketSystem.Desktop.Views
 {
     public partial class MainWindow : Window
     {
@@ -9,6 +10,11 @@ namespace TicketSystem.Desktop.views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
 
     }
