@@ -3,17 +3,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              x:Class="TicketSystem.Desktop.Views.TicketView">
-    <Grid ColumnDefinitions="* * *">
+    <Grid ColumnDefinitions="* * *,*">
 
-		<TextBlock Grid.Column="2" Text="{Binding Title}"></TextBlock>
+		<TextBlock Grid.Column="2" Text="{Binding Title}" Name="test" IsVisible="{Binding IsAdmin}"></TextBlock>
 		<StackPanel Grid.Column="3">
 			<Button Content="send" Command="{Binding SendTaskCommand}"  ></Button>
 			<Button Content="admin button" Command="{Binding AdminCommand}"  ></Button>
 		</StackPanel>
 
-		<ListBox Items="{Binding Path=Tasks}" Grid.ColumnSpan="2">
+		<ListBox Items="{Binding Path=Tasks}" Grid.ColumnSpan="2" Grid.Column="0">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel />
@@ -21,14 +22,31 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<StackPanel MaxWidth="350" MaxHeight="350" Orientation="Vertical" >
+					<StackPanel MaxWidth="350" MaxHeight="350" Orientation="Vertical" Name="Stack"  Background="{DynamicResource BlueBrush}">
+                        <Button Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" CommandParameter="{Binding .}" Command="{Binding $parent[ListBox].DataContext.EditTaskCommand}">
 
+                            <Image Source="{SvgImage /Images/ic_edit.svg}" Width="25"></Image>
+
+                        </Button>
+
+						<!--<i:Interaction.Behaviors >
+
+                            <DataTriggerBehavior Binding="{Binding #test.IsVisible}" ComparisonCondition="Equal" Value="True">
+                                <ChangePropertyAction TargetObject="Stack" PropertyName="Background" Value="{DynamicResource BlueBrush}" />
+                            </DataTriggerBehavior>
+                            <DataTriggerBehavior Binding="{Binding #test.IsVisible}" ComparisonCondition="Equal" Value="False">
+                                <ChangePropertyAction TargetObject="Stack" PropertyName="Background" Value="{DynamicResource Red}" />
+                            </DataTriggerBehavior>
+                            <DataTriggerBehavior Binding="{Binding #TaskStatus.Values}" ComparisonCondition="Equal" Value="3">
+                                <ChangePropertyAction TargetObject="Stack" PropertyName="Background" Value="{DynamicResource Green}" />
+                            </DataTriggerBehavior>
+                        </i:Interaction.Behaviors>-->
 						<TextBlock Text="{Binding Title}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
 						<TextBlock Text="{Binding Description}" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
-						<TextBlock Text="{Binding TaskStatus.Title }" Margin="5,0,0,0" TextWrapping="Wrap"></TextBlock>
+						<TextBlock Text="{Binding TaskStatus.Title}" Margin="5,0,0,0" TextWrapping="Wrap" Name="text"></TextBlock>
 
-						<StackPanel  DockPanel.Dock="Left" IsVisible="{Binding Path=IsAdmin}" x:Name="Stack">
-							<StackPanel Orientation="Horizontal">
+						<StackPanel  DockPanel.Dock="Left">
+                            <StackPanel Orientation="Horizontal">
 
 								<TextBlock  Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding User.UserFirstName , StringFormat='от: {0}'}"></TextBlock>
 								<TextBlock   TextWrapping="Wrap" Text="{Binding User.UserSurname ,StringFormat='{} {0} '}"></TextBlock>
@@ -41,23 +59,30 @@
 								<TextBlock   TextWrapping="Wrap" Text="{Binding Cabinet, StringFormat='кабинет: {0}' }" IsVisible="{Binding Cabinet, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"></TextBlock>
 
 							</StackPanel>
+							
 
-							<Button Background="Transparent">
-
-								<Image Source="/Images/text-box-edit-outline.png" Width="25"></Image>
-
-							</Button>
+                       
 						</StackPanel>
 
-                        <Interaction.Behaviors >
 
-                            <DataTriggerBehavior Binding="{Binding User.UserRoleId}" Value="1">
-                                <ChangePropertyAction TargetObject="{Binding #Stack}" PropertyName="IsVisible" Value="True" />
-                            </DataTriggerBehavior>
-							<DataTriggerBehavior Binding="{Binding User.UserRoleId}" Value="2">
-                                <ChangePropertyAction TargetObject="{Binding #Stack}" PropertyName="IsVisible" Value="False" />
-                            </DataTriggerBehavior>
-                        </Interaction.Behaviors>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Button Background="Transparent" CommandParameter="{Binding .}"  Command="{Binding $parent[ListBox].DataContext.CancelTaskCommand}" >
+
+                                <Image Source="{SvgImage /Images/ic_cancel.svg}" Width="25"></Image>
+
+                            </Button>
+                            <Button Background="Transparent" CommandParameter="{Binding .}"  Command="{Binding $parent[ListBox].DataContext.WaitTaskCommand}">
+
+                                <Image Source="{SvgImage /Images/ic_time.svg}" Width="25"></Image>
+
+                            </Button>
+                            <Button Background="Transparent" CommandParameter="{Binding .}"  Command="{Binding $parent[ListBox].DataContext.ConfirmTaskCommand}">
+
+                                <Image Source="{SvgImage /Images/ic_correct.svg}" Width="25"></Image>
+
+                            </Button>
+                        </StackPanel>
+                     
 
 					</StackPanel>
 
