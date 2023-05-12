@@ -12,6 +12,7 @@ public partial class TaskStatus
     public int Id { get; set; }
 
     public string Title { get; set; }
+    public int Priority { get; set; }
     [JsonIgnore]
     public virtual ICollection<Task> Tasks { get; }  = new List<Task>();    
 }
