@@ -16,7 +16,11 @@
 			<DataTemplate DataType="{x:Type viewModels:TicketViewModel}">
 				<views:TicketView />
 			</DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:AddEditTaskViewModel}">
+                <views:AddEditTicketView />
+            </DataTemplate>
 		</ContentControl.DataTemplates>
+
 	</ContentControl>
 
 
