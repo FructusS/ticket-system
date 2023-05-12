@@ -14,6 +14,10 @@ using Prism.Mvvm;
 using System.Net.Http.Json;
 using Shared.ViewModels;
 using Microsoft.AspNetCore.SignalR.Client;
+using TicketSystem.Backend.Controllers;
+using Shared.ViewModels.UserModels;
+using TicketSystem.Database.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace TicketSystem.Desktop.ViewModels
 {
@@ -24,13 +28,12 @@ namespace TicketSystem.Desktop.ViewModels
 
         private readonly IEventAggregator _eventAggregator;
 
-        private const string url = "http://localhost:7253/api/Users";
-        private static HttpClient httpClient = new()
+        private const string url = "http://localhost:7253/api/User";
+        private static readonly HttpClient _httpClient = new()
         {
             BaseAddress = new Uri(url),
         };
 
-        private readonly HubConnection _hubConnection;
 
         private bool _isEnabled;
         public bool IsEnabled
@@ -47,10 +50,7 @@ namespace TicketSystem.Desktop.ViewModels
         public string ErrorText
         {
             get { return _errorText; }
-            set
-            {
-                SetProperty(ref _errorText, value);
-            }
+            set => SetProperty(ref _errorText, value);
         }
 
         private string _userName;
@@ -82,11 +82,10 @@ namespace TicketSystem.Desktop.ViewModels
 
         public LoginViewModel(IEventAggregator eventAggregator)
         {
-            _hubConnection = new HubConnectionBuilder()
-            .WithUrl($"http://localhost:7253/ticketHub")
-            .Build();
+     
             _eventAggregator = eventAggregator;
-            LoginCommand = new DelegateCommand(async () => await OnLogin(), CanSubmit).ObservesProperty(() => IsEnabled); ;
+         //   LoginCommand = new DelegateCommand(async () => await OnLogin(), CanSubmit).ObservesProperty(() => IsEnabled); 
+            LoginCommand = new DelegateCommand(async () => await OnLogin()); 
         }
 
 
@@ -101,36 +100,39 @@ namespace TicketSystem.Desktop.ViewModels
 
             using StringContent jsonContent = new(
 
-            JsonSerializer.Serialize(new UserRequestModel
+            JsonSerializer.Serialize(new LoginRequestViewModel
             {
-                UserName = UserName,
-                Password = Password
+                Username = "admin",
+                Password = "admin"
             }),
             Encoding.UTF8,
             "application/json");
-            using HttpResponseMessage response = await httpClient.PostAsync(
-     $"{url}/login",
-     jsonContent);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var user = await response.Content.ReadFromJsonAsync<UserResponseModel>();
-                if (user == null)
+                using HttpResponseMessage response = await _httpClient.PostAsync($"{url}/Login", jsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    var user = await response.Content.ReadFromJsonAsync<LoginResponseViewModel>();
+                    if (user == null)
+                    {
+                        ErrorText = "Неверный логин или пароль";
+                        return;
+                    }
+                 
+                    _eventAggregator.GetEvent<LoginEvent>().Publish(user);
+                }
+                else
                 {
                     ErrorText = "Неверный логин или пароль";
-                    return;
                 }
-                if (user.UserRole == "Админ")
-                {
-
-                    _hubConnection.InvokeAsync("Join", user.UserName);
-
-                }
-                _eventAggregator.GetEvent<LoginEvent>().Publish(user);
             }
-            else
+            catch (Exception ex)
             {
-                ErrorText = "Неверный логин или пароль";
+
+                ErrorText = ex.Message;
             }
+
+
         }
     }
 
