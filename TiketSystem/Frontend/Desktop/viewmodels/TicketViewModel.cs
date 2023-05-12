@@ -3,90 +3,173 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Fizzler;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Commands;
 using Prism.Events;
 using Shared.ViewModels;
+using TicketSystem.Backend.Controllers;
+using TicketSystem.Database.Models;
+using TicketSystem.Desktop.Events;
 using MyTask = TicketSystem.Database.Models.Task;
+using Task = System.Threading.Tasks.Task;
+
 namespace TicketSystem.Desktop.ViewModels
 {
     public class TicketViewModel : BaseViewModel
     {
 
         private readonly IEventAggregator _eventAggregator;
-
+        private const string url = "http://localhost:7253/api/Task/";
 
         private static readonly HttpClient _httpClient = new()
         {
-            BaseAddress = new Uri($"http://localhost:7253/api/Tasks/"),
+            BaseAddress = new Uri(url),
         };
 
         private readonly HubConnection _hubConnection;
         private ObservableCollection<MyTask> tasks = new();
-        private UserResponseModel _userModel;
+        private LoginResponseViewModel _userModel;
 
-        private bool _isAdmin { get; set; }
 
-        public bool IsAdmin
-        {
-            get { return _isAdmin; }
-            set
-            {
-                _isAdmin = value;
-                OnPropertyChanged("IsAdmin");
-            }
-
-        }
-
-        private string title { get; set; }
-        public string Title
-        {
-            get { return title; }
-            set
-            {
-                title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-        public DelegateCommand SendTaskCommand { get; }
-        public DelegateCommand AdminCommand { get; }
         public ObservableCollection<MyTask> Tasks
         {
             get { return tasks; }
             set
             {
                 tasks = value;
-                OnPropertyChanged("Tasks");
+                OnPropertyChanged();
             }
         }
 
-        public TicketViewModel(UserResponseModel userModel)
+        #region commands
+
+        public DelegateCommand<MyTask> CancelTaskCommand { get; private set; }
+        public DelegateCommand<MyTask> EditTaskCommand { get; private set; }
+        public DelegateCommand<MyTask> WaitTaskCommand { get; private set; }
+        public DelegateCommand<MyTask> ConfirmTaskCommand { get; private set; }
+        #endregion
+
+
+        public TicketViewModel(LoginResponseViewModel userModel, IEventAggregator eventAggregator)
         {
-
             _userModel = userModel;
-
+            _eventAggregator = eventAggregator; 
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _userModel.Token);
+            CancelTaskCommand = new DelegateCommand<MyTask>(async (task) => await OnCancelTask(task));
+            EditTaskCommand = new DelegateCommand<MyTask>( OnEditTask);
+            ConfirmTaskCommand = new DelegateCommand<MyTask>( async (task) => await OnConfirmTask(task));
+            WaitTaskCommand = new DelegateCommand<MyTask>(async (tasks) => await OnWaitTask(tasks));
 
             LoadTaskList();
 
 
 
             _hubConnection = new HubConnectionBuilder()
-                .WithUrl($"http://localhost:7253/ticketHub")
+                .WithUrl($"http://localhost:7253/ticketHub", options =>
+                {
+                    options.AccessTokenProvider = () => Task.FromResult(_userModel.Token);
+                })
                 .Build();
 
             Connect();
+            _hubConnection.On<string>("connectionId", (connectionId) =>
+            {
+                userModel.ConnectionId = connectionId;
+            });
             _hubConnection.On<MyTask>("newTask", (task) =>
             {
                 Tasks.Add(task);
             });
-            IsAdmin = _userModel.UserRole == "Админ";
 
         }
 
+        private async Task OnWaitTask(MyTask task)
+        {
+
+            using StringContent jsonContent = new(
+
+                JsonSerializer.Serialize(task),
+                Encoding.UTF8,
+                "application/json");
+            try
+            {
+                
+                using HttpResponseMessage response = await _httpClient.PatchAsync($"{url}{5}", jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    LoadTaskList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            LoadTaskList();
+        }
+
+        private async Task OnConfirmTask(MyTask task)
+        {
+
+
+            using StringContent jsonContent = new(
+
+                JsonSerializer.Serialize(task),
+                Encoding.UTF8,
+                "application/json");
+            try
+            {
+                using HttpResponseMessage response = await _httpClient.PatchAsync($"{url}{1}", jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    LoadTaskList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+
+        private void OnEditTask(MyTask task)
+        {
+            _eventAggregator.GetEvent<AddEditTaskEvent>().Publish(new AddEditTaskEventParameters{LoginResponseViewModel = _userModel,Task = task});
+        }
+
+        private async Task OnCancelTask(MyTask task)
+        {
+            var test = JsonSerializer.Serialize(task);
+            using StringContent jsonContent = new(
+
+                JsonSerializer.Serialize(task),
+                Encoding.UTF8,
+                "application/json");
+            try
+            {
+                using HttpResponseMessage response = await _httpClient.PatchAsync($"{url}{3}", jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    LoadTaskList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            LoadTaskList();
+        }
 
 
         private async Task LoadTaskList()
@@ -104,14 +187,10 @@ namespace TicketSystem.Desktop.ViewModels
             }
             catch (Exception ex)
             {
-                SendLocalMessage(String.Empty, "не удалось подключиться \n" + ex.Message);
+
             }
 
         }
 
-        private void SendLocalMessage(string empty, string ex)
-        {
-            title = empty + ex;
-        }
     }
 }
