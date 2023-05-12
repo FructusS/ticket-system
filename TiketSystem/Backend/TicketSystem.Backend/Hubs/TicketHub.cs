@@ -1,101 +1,67 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
+using Shared.ViewModels;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Shared.ViewModels.UserModels;
 using TicketSystem.Database;
 using TicketSystem.Database.Models;
 using TicketSystem.Shared.ViewModels;
 using MyTask = TicketSystem.Database.Models.Task;
 using Task = System.Threading.Tasks.Task;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace TicketSystem.Backend.Hubs
 {
+    [Authorize]
     public class TicketHub : Hub
-    { 
-        public readonly static List<UserViewModel> _Connections = new List<UserViewModel>();
-        private readonly static Dictionary<string, string> _ConnectionsMap = new Dictionary<string, string>();
-
+    {
         private readonly TicketSystemDbContext _context;
-        private readonly IMapper _mapper;
-        public TicketHub(TicketSystemDbContext context, IMapper mapper)
+
+        public TicketHub(TicketSystemDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public async Task SendTask(MyTask task)
+        public async Task SendTask(MyTask task, string username)
         {
-
-
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
-            await Clients.Caller.SendAsync("newTask", task);
-            await Clients.Group("admins").SendAsync("newTask", task);
-            
-
+            if (task is not null)
+            {
+                // Send the message
+                await Clients.Group("admins").SendAsync("newTask", task);
+                await Clients.User(Context.ConnectionId).SendAsync("newTask", task);
+            }
         }
 
-        public async Task Join(string username)
+        public async Task Join()
         {
-            try
-            {
-                var user = _Connections.Where(u => u.UserName == username).FirstOrDefault();
-                if (user != null && user.UserRole == "Админ")
-                {
-              
-                    await Groups.AddToGroupAsync(Context.ConnectionId, "admins");
-                 
-                }
-
-            }
-            catch (Exception ex)
-            {
-                await Clients.Caller.SendAsync("onError", "You failed to join the chat room!" + ex.Message);
-            }
+            await Clients.Caller.SendAsync("connectionId", Context.ConnectionId);
         }
 
         public override Task OnConnectedAsync()
         {
             try
             {
-                var user = _context.Users.Where(u => u.UserName == "admin").FirstOrDefault();
+                var user = _context.Users.Where(u => u.UserName == Context.User.Identity.Name).FirstOrDefault();
 
-                var userViewModel = _mapper.Map<User, UserViewModel>(user);
-                if (!_Connections.Any(u => u.UserName == user.UserName))
-                { 
-                    
-                    _Connections.Add(userViewModel);
-                    _ConnectionsMap.Add(userViewModel.UserName, Context.ConnectionId);
+                var userRole = _context.UserRoles.FirstOrDefault(x => x.UserId == user.Id);
+                var role = _context.Roles.FirstOrDefault(x => x.Id == userRole.RoleId);
+                if (role != null && role.Name == "Admin")
+                {
+                    Groups.AddToGroupAsync(Context.ConnectionId, "admins");
                 }
 
-                
+                Join();
             }
             catch (Exception ex)
             {
                 Clients.Caller.SendAsync("onError", "OnDisconnected: " + ex.Message);
             }
+
             return base.OnConnectedAsync();
         }
-
-        public override Task OnDisconnectedAsync(Exception exception)
-        {
-            try
-            {
-                var user = _context.Users.Where(u => u.UserName == "admin").First();
-                var userViewModel = _mapper.Map<User, UserViewModel>(user);
-                _Connections.Remove(userViewModel);
-
-
-                // Remove mapping
-                _ConnectionsMap.Remove(userViewModel.UserName);
-            }
-            catch (Exception ex)
-            {
-                Clients.Caller.SendAsync("onError", "OnDisconnected: " + ex.Message);
-            }
-
-            return base.OnDisconnectedAsync(exception);
-        }
-
-
-
     }
 }
