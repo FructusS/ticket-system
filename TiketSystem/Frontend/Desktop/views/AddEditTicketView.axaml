@@ -4,5 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="TicketSystem.Desktop.Views.AddEditTicketView">
-  Welcome to Avalonia!
+	<Grid RowDefinitions="50 * 50" ColumnDefinitions="50 * 50">
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Название"></TextBlock>
+                <TextBox Text="{Binding Task.Title}"></TextBox>
+
+			</StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Описание"></TextBlock>
+                <TextBox Text="{Binding Task.Description}"></TextBox>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="Кабинет"  IsChecked="{Binding IsSelected}"></CheckBox>
+				<TextBlock></TextBlock>
+				<TextBox Text="{Binding Task.Cabinet}" IsVisible="{Binding IsSelected}"></TextBox>
+
+            </StackPanel>
+            <Button Content="Сохранить" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding SaveTaskCommand}"></Button>
+            
+        </StackPanel>
+    </Grid>
 </UserControl>
